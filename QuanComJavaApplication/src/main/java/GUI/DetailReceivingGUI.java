@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class DetailReceivingGUI extends JPanel implements MouseListener, ActionListener{
@@ -59,7 +60,9 @@ public class DetailReceivingGUI extends JPanel implements MouseListener, ActionL
 	private JButton addReceivingBtn;
 	private JButton updateReceivingBtn;
 	private JButton delReceivingBtn;
-	
+	Component[] components1;
+	Component[] components2;
+	Component[] totalComponents;
 	/**
 	 * Create the panel.
 	 */
@@ -419,8 +422,11 @@ public class DetailReceivingGUI extends JPanel implements MouseListener, ActionL
 		btnField.add(separator);
 		//End
 		
-		
-		
+		//Mảng lấy các component
+		components1 = contentField.getComponents();
+		components2 = infoDetailOrderPanel.getComponents();
+		totalComponents = Arrays.copyOf(components1, components1.length + components2.length);
+		System.arraycopy(components2, 0, totalComponents, components1.length, components2.length);
 	}
 	
 	@Override
@@ -459,6 +465,16 @@ public class DetailReceivingGUI extends JPanel implements MouseListener, ActionL
 			else {
 				JOptionPane.showMessageDialog(null, "Tao phieu nhap thanh cong!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 			}
+		}
+	}
+	//Hàm reset dl các component
+	void resetComponent() {				
+		for (Component component : totalComponents) {
+		    if (component instanceof JTextField) {
+		    	
+		        ((JTextField) component).setText(""); // reset giá trị trên JTextField
+		    }
+		    // Thêm các trường hợp khác tương tự nếu cần thiết
 		}
 	}
 }

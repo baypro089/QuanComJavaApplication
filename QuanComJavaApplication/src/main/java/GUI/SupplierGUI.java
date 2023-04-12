@@ -33,7 +33,7 @@ public class SupplierGUI extends JPanel implements MouseListener, ActionListener
 	private DefaultTableCellRenderer centerRenderer;
 	private JPanel searchPanel;
 	private JLabel lblNewLabel;
-	private JTextField IdSupplierTxt;
+	private JTextField idSupplierTxt;
 	private JTextField nameSupplierTxt;
 	private JTextField addressSupplierTxt;
 	private JTextField phoneNumbTxt;
@@ -107,11 +107,11 @@ public class SupplierGUI extends JPanel implements MouseListener, ActionListener
         idSupplierLabel.setBounds(60, 50, 70, 30);
         staffInfoPanel.add(idSupplierLabel);
         
-        IdSupplierTxt = new JTextField();
-        IdSupplierTxt.setFont(new Font("Arial", Font.PLAIN, 13));
-        IdSupplierTxt.setColumns(10);
-        IdSupplierTxt.setBounds(143, 50, 167, 30);
-        staffInfoPanel.add(IdSupplierTxt);
+        idSupplierTxt = new JTextField();
+        idSupplierTxt.setFont(new Font("Arial", Font.PLAIN, 13));
+        idSupplierTxt.setColumns(10);
+        idSupplierTxt.setBounds(143, 50, 167, 30);
+        staffInfoPanel.add(idSupplierTxt);
         
         nameSupplierTxt = new JTextField();
         nameSupplierTxt.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -149,7 +149,7 @@ public class SupplierGUI extends JPanel implements MouseListener, ActionListener
         addSupplierBtn = new JButton("Thêm");      
         addSupplierBtn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if(IdSupplierTxt.getText().equals("") || nameSupplierTxt.getText().equals("") || addressSupplierTxt.getText().equals("") || phoneNumbTxt.getText().equals("")) {
+        		if(idSupplierTxt.getText().equals("") || nameSupplierTxt.getText().equals("") || addressSupplierTxt.getText().equals("") || phoneNumbTxt.getText().equals("")) {
         			JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         		}
         		else {

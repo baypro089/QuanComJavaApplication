@@ -152,6 +152,7 @@ public class ReceivingGUI extends JPanel implements MouseListener, ActionListene
         	public void actionPerformed(ActionEvent e) {
         		GiaoDien.phieuNhap.setVisible(false);
 		        GiaoDien.taoPhieu.setVisible(true);
+		        GiaoDien.taoPhieu.resetComponent();
         	}
         });
         btnField.add(createBtn);

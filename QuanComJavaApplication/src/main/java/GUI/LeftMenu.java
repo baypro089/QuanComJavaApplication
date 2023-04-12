@@ -78,6 +78,10 @@ public class LeftMenu extends JPanel implements ActionListener{
 				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func2");	
 				funcBtn[i].setEnabled(false);
 			}
+			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Tài khoản")) {		
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func6");	
+				funcBtn[i].setEnabled(false);
+			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Nhân viên")) {		
 				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func7");	
 				funcBtn[i].setEnabled(false);

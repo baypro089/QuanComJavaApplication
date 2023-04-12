@@ -1,6 +1,7 @@
 package main.java.GUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoNatureGreenIJTheme;
@@ -9,6 +10,7 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +41,7 @@ public class GiaoDien extends JFrame {
     static DetailReceivingGUI taoPhieu;
     static SupplierGUI supplier;
     static StaffsGUI staffs;
+    static AccountAndRoleGUI accounts;
     public GiaoDien() {
         init();
         this.setVisible(true);
@@ -77,11 +80,11 @@ public class GiaoDien extends JFrame {
         mainContent.add(switchPanel);
         //Tạo đơn
         functionPanel1 = new JPanel(null);
-        functionPanel1.setPreferredSize(new Dimension(1080, 700));
-        switchPanel.add(functionPanel1, "func1");
+        functionPanel1.setPreferredSize(new Dimension(1080, 700));      
         taoDon = new DetailOrdersGUI();
         taoDon.setBounds(0, 0, 1080, 700);
         functionPanel1.add(taoDon);
+        switchPanel.add(functionPanel1, "func1");
         
         //Tạo phiếu nhập
         functionPanel2 = new JPanel(null);
@@ -92,9 +95,9 @@ public class GiaoDien extends JFrame {
         taoPhieu = new DetailReceivingGUI();
         taoPhieu.setBounds(0, 0, 1080, 700);
         functionPanel2.add(GiaoDien.taoPhieu);
-        taoPhieu.setVisible(false);
-        
+        taoPhieu.setVisible(false);   
         switchPanel.add(functionPanel2, "func2");   
+        
         
         //chức năng 3
         functionPanel3 = new JPanel(null);
@@ -110,8 +113,12 @@ public class GiaoDien extends JFrame {
         functionPanel5 = new JPanel(null);
         switchPanel.add(functionPanel5, "func5");
         
-        //chức năng 6
+        //Tài khoản và phân quyền
         functionPanel6 = new JPanel(null);
+        functionPanel6.setPreferredSize(new Dimension(1080, 700));
+        accounts = new AccountAndRoleGUI();
+        accounts.setBounds(0, 0, 1080, 700);
+        functionPanel6.add(accounts);
         switchPanel.add(functionPanel6, "func6");
         
         //Nhân viên
