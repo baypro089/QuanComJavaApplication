@@ -5,17 +5,16 @@ import javax.swing.*;
 
 import javax.swing.JPanel;
 
-public class AccountGUI extends JTabbedPane {
+public class AccountAndRoleGUI extends JTabbedPane {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Create the panel.
 	 */
-	public AccountGUI() {
+	public AccountAndRoleGUI() {
 		init();		
 	}
 	public void init() {
