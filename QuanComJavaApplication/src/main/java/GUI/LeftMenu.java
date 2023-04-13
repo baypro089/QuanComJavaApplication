@@ -15,10 +15,9 @@ public class LeftMenu extends JPanel implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	//private static final long serialVersionUID = 1L;
-	public JButton[] funcBtn = new JButton[8];
-	public String [] BtnText = {"Đơn hàng", "Nhập hàng", "Món ăn", "Nguyên liệu", "Công thức"
-			, "Tài khoản", "Nhân viên", "Nhà cung cấp"};
-	int x = 0, y = 180;
+	public JButton[] funcBtn = new JButton[7];
+	public String [] BtnText = {"Đơn hàng", "Nhập hàng", "Món ăn", "Nguyên liệu", "Tài khoản", "Nhân viên", "Nhà cung cấp"};
+	int x = 0, y = 245;
 	int w = 200, h = 65;
 	public LeftMenu() {
 		
@@ -36,13 +35,10 @@ public class LeftMenu extends JPanel implements ActionListener{
 		for(int i = 0; i < BtnText.length; i++) {
 			funcBtn[i] = new JButton(BtnText[i]);
 			funcBtn[i].setBounds(x, y, w, h);
-			//funcBtn[i].setBackground(Color.darkGray);
-			//funcBtn[i].setForeground(Color.white);
 			funcBtn[i].setOpaque(true);
 			funcBtn[i].setFocusPainted(false);
 			funcBtn[i].setBorder(null);
 			funcBtn[i].setFont(new Font("Arial", Font.BOLD, 15));
-			//funcBtn[i].addMouseListener(action);
 			funcBtn[i].addActionListener(this);
 			this.add(funcBtn[i]);
 			y = y + h;
@@ -79,15 +75,15 @@ public class LeftMenu extends JPanel implements ActionListener{
 				funcBtn[i].setEnabled(false);
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Tài khoản")) {		
-				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func6");	
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func5");	
 				funcBtn[i].setEnabled(false);
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Nhân viên")) {		
-				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func7");	
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func6");	
 				funcBtn[i].setEnabled(false);
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Nhà cung cấp")) {		
-				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func8");	
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func7");	
 				funcBtn[i].setEnabled(false);
 			}
 		}

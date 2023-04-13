@@ -295,7 +295,7 @@ public class DetailOrdersGUI extends JPanel implements MouseListener, ActionList
         selectItemPanel = new JPanel(new BorderLayout());
         switchPanel.add(selectItemPanel, "hello1");
               
-        model = new DefaultTableModel(new Object[]{"Mã món", "Tên món", "Số lượng còn lại", "Giá", "Chọn"}, 0);	
+        model = new DefaultTableModel(new Object[]{"Mã món", "Tên món", "Số lượng còn lại", "Giá","Số lượng mua", "Chọn"}, 0);	
         
         ordersSelectedTable = new JTable(model);   
         ordersSelectedTable.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -310,18 +310,18 @@ public class DetailOrdersGUI extends JPanel implements MouseListener, ActionList
         		nameItemSelectedTxt.setText(model.getValueAt(row, 1).toString());
         		remainItemSelectedTxt.setText(model.getValueAt(row, 2).toString());
         		priceItemSelectedTxt.setText(model.getValueAt(row, 3).toString());
-        		
+        		amountInputItemSelectedTxt.setText(model.getValueAt(row, 4).toString());
             }          
         });
         
 	    ordersSelectedTable.setDefaultRenderer(String.class, centerRenderer);
         ordersSelectedTable.setRowHeight(30);
         
-        model.addRow(new Object[]{"C1", "Cơm sườn", 10, 30000, false});
-	    model.addRow(new Object[]{"C2", "Cơm gà", 1, 30000, false});
-	    model.addRow(new Object[]{"C3", "Cơm chiên", 1, 30000, false});
-	    model.addRow(new Object[]{"C4", "Cơm trộn", 1, 30000, false});
-	    for(int i = 0; i < 5; i++) {
+        model.addRow(new Object[]{"C1", "Cơm sườn", 10, 30000, 0, false});
+	    model.addRow(new Object[]{"C2", "Cơm gà", 1, 30000, 0, false});
+	    model.addRow(new Object[]{"C3", "Cơm chiên", 1, 30000, 0, false});
+	    model.addRow(new Object[]{"C4", "Cơm trộn", 1, 30000, 0, false});
+	    for(int i = 0; i < 6; i++) {
 	    	if(i == 1) {
 	    		ordersSelectedTable.getColumnModel().getColumn(i).setPreferredWidth(300);
 	    		ordersSelectedTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
@@ -333,7 +333,7 @@ public class DetailOrdersGUI extends JPanel implements MouseListener, ActionList
 	    }
     
 	    
-        TableColumn selectColumn = ordersSelectedTable.getColumnModel().getColumn(4);
+        TableColumn selectColumn = ordersSelectedTable.getColumnModel().getColumn(5);
         selection = new JCheckBox();
     	selection.addItemListener(this);
     	selectColumn.setCellEditor(new DefaultCellEditor(selection));
@@ -593,10 +593,14 @@ public class DetailOrdersGUI extends JPanel implements MouseListener, ActionList
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == selection && selection.isSelected()) {
-			String input;
+		int selectedRow = ordersSelectedTable.getSelectedRow(); // Lấy chỉ mục của hàng được chọn
+		int modelRow = ordersSelectedTable.convertRowIndexToModel(selectedRow); // Chuyển đổi chỉ mục hàng sang chỉ mục hàng tương ứng trong mô hình dữ liệu
+		
+		if(e.getItemSelectable() == selection && selection.isSelected()) {
+			String input;					
 			do {
-				input = JOptionPane.showInputDialog("Nhap so luong mon");							
+				input = JOptionPane.showInputDialog("Nhập số lượng món");	
+				ordersSelectedTable.setValueAt(input, modelRow, 4);
 				if(input == null) {
 					selection.setSelected(false);	
 					break;
@@ -606,6 +610,7 @@ public class DetailOrdersGUI extends JPanel implements MouseListener, ActionList
 		}
 		else {				
 			amountInputItemSelectedTxt.setText("");
+			ordersSelectedTable.setValueAt(0, modelRow, 4);
 		}		
 	}
 }
