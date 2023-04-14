@@ -40,6 +40,7 @@ public class StaffsGUI extends JPanel implements MouseListener, ActionListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton maleRadioBtn;
 	private JRadioButton femaleRadioBtn;
+	private JDateChooser dateChooser;
 	/**
 	 * Create the panel.
 	 */
@@ -83,6 +84,9 @@ public class StaffsGUI extends JPanel implements MouseListener, ActionListener{
 	    	}
 	    }
 	    
+	    
+	    
+	    
         staffScrollPane = new JScrollPane(staffTable);
         staffScrollPane.setBounds(5, 5, 1070, 310);
         staffListPanel.add(staffScrollPane);
@@ -96,7 +100,7 @@ public class StaffsGUI extends JPanel implements MouseListener, ActionListener{
         staffPhoto = new JLabel("Ảnh");
         staffPhoto.setBackground(new Color(255, 255, 255));
         staffPhoto.setHorizontalAlignment(SwingConstants.CENTER);
-        staffPhoto.setBounds(40, 50, 140, 140);
+        staffPhoto.setBounds(41, 70, 140, 130);
         staffPhoto.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         staffInfoPanel.add(staffPhoto);
         
@@ -108,46 +112,46 @@ public class StaffsGUI extends JPanel implements MouseListener, ActionListener{
         
         JLabel idsStaffLabel = new JLabel("Mã NV");
         idsStaffLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        idsStaffLabel.setBounds(270, 50, 70, 30);
+        idsStaffLabel.setBounds(271, 70, 70, 30);
         staffInfoPanel.add(idsStaffLabel);
         
         idStaffTxt = new JTextField();
         idStaffTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         idStaffTxt.setColumns(10);
-        idStaffTxt.setBounds(340, 50, 170, 30);
+        idStaffTxt.setBounds(341, 70, 170, 30);
         staffInfoPanel.add(idStaffTxt);
         
         nameStaffTxt = new JTextField();
         nameStaffTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         nameStaffTxt.setColumns(10);
-        nameStaffTxt.setBounds(600, 50, 170, 30);
+        nameStaffTxt.setBounds(601, 70, 170, 30);
         staffInfoPanel.add(nameStaffTxt);
         
         JLabel nameStaffLabel = new JLabel("Tên NV");
         nameStaffLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        nameStaffLabel.setBounds(530, 50, 70, 30);
+        nameStaffLabel.setBounds(531, 70, 70, 30);
         staffInfoPanel.add(nameStaffLabel);
         
         JLabel addressStaffLabel = new JLabel("Địa chỉ");
         addressStaffLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        addressStaffLabel.setBounds(530, 150, 70, 30);
+        addressStaffLabel.setBounds(531, 170, 70, 30);
         staffInfoPanel.add(addressStaffLabel);
         
         addressStaffTxt = new JTextField();
         addressStaffTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         addressStaffTxt.setColumns(10);
-        addressStaffTxt.setBounds(600, 150, 170, 30);
+        addressStaffTxt.setBounds(601, 170, 170, 30);
         staffInfoPanel.add(addressStaffTxt);
         
         JLabel phoneNumbLabel = new JLabel("SĐT");
         phoneNumbLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        phoneNumbLabel.setBounds(270, 150, 70, 30);
+        phoneNumbLabel.setBounds(271, 170, 70, 30);
         staffInfoPanel.add(phoneNumbLabel);
         
         phoneNumbTxt = new JTextField();
         phoneNumbTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         phoneNumbTxt.setColumns(10);
-        phoneNumbTxt.setBounds(340, 150, 170, 30);
+        phoneNumbTxt.setBounds(341, 170, 170, 30);
         staffInfoPanel.add(phoneNumbTxt);
         
         addStaffBtn = new JButton("Thêm");      
@@ -185,41 +189,34 @@ public class StaffsGUI extends JPanel implements MouseListener, ActionListener{
         staffInfoPanel.add(delStaffBtn);
         
         JButton browsePhoto = new JButton("Chọn");
-        browsePhoto.setBounds(70, 200, 80, 30);
+        browsePhoto.setBounds(71, 220, 80, 30);
         staffInfoPanel.add(browsePhoto);
         
         JLabel lblGiiTnh = new JLabel("Giới tính");
         lblGiiTnh.setFont(new Font("Arial", Font.BOLD, 13));
-        lblGiiTnh.setBounds(270, 100, 70, 30);
+        lblGiiTnh.setBounds(271, 120, 70, 30);
         staffInfoPanel.add(lblGiiTnh);
+    
         
         maleRadioBtn = new JRadioButton("Nam");
         buttonGroup.add(maleRadioBtn);
-        maleRadioBtn.setBounds(340, 100, 60, 30);
+        maleRadioBtn.setBounds(341, 120, 60, 30);
         staffInfoPanel.add(maleRadioBtn);
         
         femaleRadioBtn = new JRadioButton("Nữ");
         buttonGroup.add(femaleRadioBtn);
-        femaleRadioBtn.setBounds(400, 100, 60, 30);
+        femaleRadioBtn.setBounds(401, 120, 60, 30);
         staffInfoPanel.add(femaleRadioBtn);
+        
+        
         
         JLabel staffDateLabel = new JLabel("Ngày sinh");
         staffDateLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        staffDateLabel.setBounds(530, 100, 70, 30);
+        staffDateLabel.setBounds(531, 120, 70, 30);
         staffInfoPanel.add(staffDateLabel);
         
-        JComboBox<String> positioncbB = new JComboBox<>();
-        positioncbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Admin", "Quản lí", "Nhân viên"}));
-        positioncbB.setBounds(340, 200, 90, 30);
-        staffInfoPanel.add(positioncbB);
-        
-        JLabel lblChcV = new JLabel("Chức vụ");
-        lblChcV.setFont(new Font("Arial", Font.BOLD, 13));
-        lblChcV.setBounds(270, 200, 70, 30);
-        staffInfoPanel.add(lblChcV);
-        
-        JDateChooser dateChooser = new JDateChooser();
-        dateChooser.setBounds(600, 100, 170, 30);
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(601, 120, 170, 30);
         staffInfoPanel.add(dateChooser);
         
         JPanel bigNamePanel = new JPanel();

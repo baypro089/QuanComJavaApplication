@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoNatureGreenIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatMonokaiProIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
@@ -45,7 +46,7 @@ public class GiaoDien extends JFrame {
     static AccountAndRoleGUI accounts;
     public GiaoDien() {
     	try {
-    		FlatMacLightLaf.setup();
+    		FlatGradiantoDeepOceanIJTheme.setup();
     	} catch( Exception ex ) {
     	    System.err.println( "Failed to initialize LaF" );
     	}

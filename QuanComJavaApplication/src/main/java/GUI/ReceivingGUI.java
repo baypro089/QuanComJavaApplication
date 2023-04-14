@@ -41,6 +41,11 @@ public class ReceivingGUI extends JPanel implements MouseListener, ActionListene
 	static JButton createBtn;
 	static JButton updateBtn;
 	static JButton delBtn;
+	private JLabel lblNewLabel;
+	private JTextField priceFrom;
+	private JTextField priceTo;
+	private JComboBox<String> sortCbB;
+	private JLabel lblSpXp;
 	/**
 	 * Create the panel.
 	 */
@@ -120,20 +125,58 @@ public class ReceivingGUI extends JPanel implements MouseListener, ActionListene
         
         JLabel lblTmKim = new JLabel("Tìm kiếm");
         lblTmKim.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTmKim.setFont(new Font("Arial", Font.BOLD, 15));
+        lblTmKim.setFont(new Font("Arial", Font.BOLD, 16));
         lblTmKim.setBounds(80, 0, 120, 40);
         searchPanel.add(lblTmKim);
         
         searchTxt = new JTextField();
         searchTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         searchTxt.setColumns(10);
-        searchTxt.setBounds(55, 131, 170, 30);
+        searchTxt.setBounds(100, 70, 170, 40);
         searchPanel.add(searchTxt);
         
         searchButton = new JButton("OK");
+        searchButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         searchButton.setFont(new Font("Arial", Font.PLAIN, 13));
-        searchButton.setBounds(90, 180, 100, 30);
+        searchButton.setBounds(100, 250, 100, 50);
         searchPanel.add(searchButton);
+        
+        JComboBox<String> searchCbB = new JComboBox<>();
+        searchCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        searchCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã phiếu nhập", "Mã nhân viên", "Mã nhà cung cấp", "Ngày tạo"}));      
+        searchCbB.setBounds(10, 70, 80, 40);
+        searchPanel.add(searchCbB);
+        
+        lblNewLabel = new JLabel("Tổng giá");
+        lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
+        lblNewLabel.setBounds(10, 125, 80, 40);
+        searchPanel.add(lblNewLabel);
+        
+        priceFrom = new JTextField();
+        priceFrom.setFont(new Font("Arial", Font.PLAIN, 13));
+        priceFrom.setColumns(10);
+        priceFrom.setBounds(100, 125, 80, 40);
+        searchPanel.add(priceFrom);
+        
+        priceTo = new JTextField();
+        priceTo.setFont(new Font("Arial", Font.PLAIN, 13));
+        priceTo.setColumns(10);
+        priceTo.setBounds(190, 125, 80, 40);
+        searchPanel.add(priceTo);
+        
+        sortCbB = new JComboBox<String>();
+        sortCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã phiếu nhập", "Mã nhân viên", "Mã nhà cung cấp", "Ngày tạo", "Tổng giá"}));
+        sortCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        sortCbB.setBounds(100, 180, 145, 40);
+        searchPanel.add(sortCbB);
+        
+        lblSpXp = new JLabel("Sắp xếp");
+        lblSpXp.setFont(new Font("Arial", Font.BOLD, 13));
+        lblSpXp.setBounds(10, 180, 80, 40);
+        searchPanel.add(lblSpXp);
         
         btnField = new JPanel();
         btnField.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
@@ -176,7 +219,7 @@ public class ReceivingGUI extends JPanel implements MouseListener, ActionListene
         
         JLabel controllerLabel = new JLabel("Cài đặt");
         controllerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        controllerLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        controllerLabel.setFont(new Font("Arial", Font.BOLD, 16));
         controllerLabel.setBounds(80, 0, 120, 40);
         btnField.add(controllerLabel);
 		//End

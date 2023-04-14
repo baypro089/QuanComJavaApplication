@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
-import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,14 +23,12 @@ public class RolesGUI extends JPanel implements MouseListener, ActionListener{
 	private JTable staffTable;
 	private DefaultTableModel detailTableModel;
 	private JScrollPane accScrollPane;
-	private DefaultTableCellRenderer centerRenderer;
-	
+	private DefaultTableCellRenderer centerRenderer;	
 	private JPanel searchPanel;
 	private JLabel lblNewLabel;
 	private JTextField idRoleTxt;
 	private JTextField nameRoleTxt;
-	private JTextField textField;
-	private JButton searchButton;
+	private JTextArea descriptionTextArea;
 	private JPanel staffInfoPanel;
 	private JButton addAccBtn;
 	private JButton fixAccBtn;
@@ -51,6 +48,9 @@ public class RolesGUI extends JPanel implements MouseListener, ActionListener{
 	Pair<String, String> materialPair;
 	Pair<String, String> supplierPair;
 	Pair<String, String> staffPair;
+	private JTextField textField;
+	private JComboBox<String> searchCbB;
+	private JComboBox<String> sortCbB;
 	/**
 	 * Create the panel.
 	 */
@@ -219,8 +219,9 @@ public class RolesGUI extends JPanel implements MouseListener, ActionListener{
         
         //////////////////////////////////////
         
-        JTextArea descriptionTextArea = new JTextArea();
+        descriptionTextArea = new JTextArea();
         descriptionTextArea.setBounds(190, 151, 170, 80);
+        descriptionTextArea.setBorder(BorderFactory.createLineBorder(Color.gray));
         staffInfoPanel.add(descriptionTextArea);
         
         JLabel lblNewLabel_1 = new JLabel("Mô tả");
@@ -253,19 +254,36 @@ public class RolesGUI extends JPanel implements MouseListener, ActionListener{
         
         JLabel lblTmKim = new JLabel("Tìm kiếm");
         lblTmKim.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTmKim.setFont(new Font("Arial", Font.BOLD, 15));
-        lblTmKim.setBounds(80, 80, 120, 40);
+        lblTmKim.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTmKim.setBounds(80, 0, 120, 40);
         searchPanel.add(lblTmKim);
+        
+        searchCbB = new JComboBox<String>();
+        searchCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã quyền", "Tên quyền"}));
+        searchCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        searchCbB.setBounds(10, 70, 101, 40);
+        searchPanel.add(searchCbB);
         
         textField = new JTextField();
         textField.setFont(new Font("Arial", Font.PLAIN, 13));
         textField.setColumns(10);
-        textField.setBounds(55, 131, 170, 30);
+        textField.setBounds(121, 70, 149, 40);
         searchPanel.add(textField);
         
-        searchButton = new JButton("OK");
+        JLabel lblSpXp = new JLabel("Sắp xếp");
+        lblSpXp.setFont(new Font("Arial", Font.BOLD, 13));
+        lblSpXp.setBounds(10, 140, 80, 40);
+        searchPanel.add(lblSpXp);
+        
+        sortCbB = new JComboBox<String>();
+        sortCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã quyền", "Tên quyền"}));
+        sortCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        sortCbB.setBounds(121, 140, 100, 40);
+        searchPanel.add(sortCbB);
+        
+        JButton searchButton = new JButton("OK");
         searchButton.setFont(new Font("Arial", Font.PLAIN, 13));
-        searchButton.setBounds(90, 180, 100, 30);
+        searchButton.setBounds(100, 269, 100, 50);
         searchPanel.add(searchButton);
 		//End
 		
