@@ -1,8 +1,6 @@
 package main.java.GUI;
 import javax.swing.*;
 
-import controller.food_action;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

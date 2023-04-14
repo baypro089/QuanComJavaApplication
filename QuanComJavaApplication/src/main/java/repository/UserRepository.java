@@ -11,12 +11,12 @@ import main.java.config.MySqlConfig;
 import main.java.model.User;
 
 public class UserRepository {
-    public List<User> getAllUser(){
+
+    public List<User> getAllUser() throws ClassNotFoundException, SQLException{
         List<User> list = new ArrayList<>();
-        Connection connection;
-		String query = "select * from users";
+        Connection connection = MySqlConfig.getConnection();
+        String query = "select * from users";
         try {
-        	connection = MySqlConfig.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -27,10 +27,98 @@ public class UserRepository {
             }
         } catch (SQLException e) {
             System.out.println("Error while query get all users "+e.getMessage());
-        } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        }
         return list;
+    }
+
+    public int login(String email, String password) throws ClassNotFoundException, SQLException{
+        int count=0;
+        Connection connection = MySqlConfig.getConnection();
+        String query = "select count(*) as count from users u where u.email= ? and u.password= ?";
+        try {
+            PreparedStatement preparedStatement =connection.prepareStatement(query);
+            preparedStatement.setString(1,email);
+            preparedStatement.setString(2,password);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            while (resultSet.next()){
+                count = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error login query "+e.getMessage());
+        }
+        return count;
+    }
+
+    public int addUser(
+            String userName,
+            String fullName,
+            String email,
+            String password,
+            String address,
+            String phone,
+            int roleId) throws ClassNotFoundException, SQLException{
+        int isSuccess = 0;
+        Connection connection = MySqlConfig.getConnection();
+        String query = "INSERT INTO users(username, password, fullname, email, address, phonenumber, role_id)\n" +
+                "values\n" +
+                "(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,userName);
+            preparedStatement.setString(2,password);
+            preparedStatement.setString(3,fullName);
+            preparedStatement.setString(4,email);
+            preparedStatement.setString(5,address);
+            preparedStatement.setString(6,phone);
+            preparedStatement.setInt(7,roleId);
+            isSuccess = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error while add user "+e.getMessage());
+        }
+        return isSuccess;
+    }
+
+    public int deleteUser(int id) throws ClassNotFoundException, SQLException{
+        int isSuccess=0;
+        Connection connection = MySqlConfig.getConnection();
+        String query = "delete from users u where u.user_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1,id);
+            isSuccess = statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error deleting user "+e.getMessage());
+        }
+        return isSuccess;
+    }
+
+    public int modifyUser(
+            int id,
+            String userName,
+            String fullName,
+            String email,
+            String password,
+            String address,
+            String phone,
+            int roleId) throws ClassNotFoundException, SQLException{
+        int isSuccess=0;
+        Connection connection = MySqlConfig.getConnection();
+        String query = "update users set username = ?, password = ?, " +
+                "fullname = ?, email = ?, address = ?, phonenumber = ?, role_id = ? where user_id=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,userName);
+            preparedStatement.setString(2,password);
+            preparedStatement.setString(3,fullName);
+            preparedStatement.setString(4,email);
+            preparedStatement.setString(5,address);
+            preparedStatement.setString(6,phone);
+            preparedStatement.setInt(7,roleId);
+            preparedStatement.setInt(8,id);
+            isSuccess = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error while modify user "+e.getMessage());
+        }
+        return isSuccess;
     }
 }
