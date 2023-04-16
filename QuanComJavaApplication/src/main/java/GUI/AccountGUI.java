@@ -2,14 +2,19 @@ package main.java.GUI;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+import com.formdev.flatlaf.json.ParseException;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class AccountGUI extends JPanel implements MouseListener, ActionListener{
@@ -20,7 +25,7 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentField;
 	private JPanel accListPanel;
-	private JTable staffTable;
+	private JTable accTable;
 	private DefaultTableModel detailTableModel;
 	private JScrollPane accScrollPane;
 	private DefaultTableCellRenderer centerRenderer;
@@ -29,8 +34,6 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
 	private JTextField idAccTxt;
 	private JTextField nameAccTxt;
 	private JTextField passTxt;
-	private JTextField textField;
-	private JButton searchButton;
 	private JPanel staffInfoPanel;
 	private JButton addAccBtn;
 	private JButton fixAccBtn;
@@ -39,6 +42,13 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
 	private JRadioButton blockedStatusRadioBtn;
 	private JRadioButton noneStatusRadioBtn;
 	private JDateChooser dateChooser;
+	private JLabel lblTmKim;
+	private JComboBox<String> searchCbB;
+	private JTextField textField;
+	private JLabel lblSpXp;
+	private JComboBox<String> sortCbB;
+	private JButton searchButton;
+	private JComboBox<String> positioncbB;
 	/**
 	 * Create the panel.
 	 */
@@ -66,23 +76,58 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
         
         contentField.add(accListPanel);
         
-        detailTableModel = new DefaultTableModel(new Object[]{"Mã tài khoản", "Tên đăng nhập", "Trạng thái", "Ngày tạo", "Email", "Quyền"}, 0);		
-        staffTable = new JTable(detailTableModel);
-        staffTable.setFont(new Font("Arial", Font.PLAIN, 14));
-        staffTable.setDefaultRenderer(String.class, centerRenderer);
-	    staffTable.setRowHeight(30);
+        detailTableModel = new DefaultTableModel(new Object[]{"Mã tài khoản", "Tên đăng nhập", "Mật khẩu", "Trạng thái", "Ngày tạo", "Quyền"}, 0);		
+        accTable = new JTable(detailTableModel);
+        accTable.setFont(new Font("Arial", Font.PLAIN, 14));
+        accTable.setDefaultRenderer(String.class, centerRenderer);
+	    accTable.setRowHeight(30);
 	    for(int i = 0; i < 6; i++) {
 	    	if(i == 1 || i == 4) {
-	    		staffTable.getColumnModel().getColumn(i).setPreferredWidth(150);
-	    		staffTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    		accTable.getColumnModel().getColumn(i).setPreferredWidth(150);
+	    		accTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 	    	}
 	    	else {
 	    		//staffTable.getColumnModel().getColumn(i).setPreferredWidth(125);
-	    		staffTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    		accTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 	    	}
 	    }
 	    
-        accScrollPane = new JScrollPane(staffTable);
+	    ListSelectionModel listSelectionModel = accTable.getSelectionModel();
+        listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listSelectionModel.addListSelectionListener(new ListSelectionListener(){      	
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+            	int row = accTable.getSelectedRow();        		   		    		        
+            	idAccTxt.setText(detailTableModel.getValueAt(row, 0).toString());
+            	nameAccTxt.setText(detailTableModel.getValueAt(row, 1).toString());
+            	passTxt.setText(detailTableModel.getValueAt(row, 2).toString());
+            	if(detailTableModel.getValueAt(row, 3).toString().equals(noneStatusRadioBtn.getText())) {
+            		noneStatusRadioBtn.setSelected(true);
+            	}
+            	else {
+            		blockedStatusRadioBtn.setSelected(true);
+            	}
+            	
+            	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            	Date date = null;
+            	try {
+            	    date = dateFormat.parse(detailTableModel.getValueAt(row, 4).toString());
+            	} catch (ParseException | java.text.ParseException e1) {
+            	    e1.printStackTrace();
+            	}
+            	dateChooser.setDate(date);
+            	for(int i = 0; i < positioncbB.getItemCount(); i++) {
+            		if(detailTableModel.getValueAt(row, 5).toString().equals(positioncbB.getItemAt(i).toString())) {
+            			positioncbB.setSelectedIndex(i);
+            			break;
+            		}
+            	}
+            }          
+        });
+	    
+        detailTableModel.addRow(new Object[] {"1", "huy123", "123456", "Khóa", "4/3/2023", "Nhân viên"});
+        
+        accScrollPane = new JScrollPane(accTable);
         accScrollPane.setBounds(5, 5, 1070, 280);
         accListPanel.add(accScrollPane);
         
@@ -186,7 +231,7 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
         staffDateLabel.setBounds(141, 190, 70, 30);
         staffInfoPanel.add(staffDateLabel);
         
-        JComboBox<String> positioncbB = new JComboBox<>();
+        positioncbB = new JComboBox<>();
         positioncbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Admin", "Quản lí", "Nhân viên"}));
         positioncbB.setBounds(471, 190, 90, 30);
         staffInfoPanel.add(positioncbB);
@@ -198,6 +243,7 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
         
         dateChooser = new JDateChooser();
         dateChooser.setBounds(211, 190, 170, 30);
+        dateChooser.setFont(new Font("Arial", Font.PLAIN, 13));
         staffInfoPanel.add(dateChooser);
         
         JPanel bigNamePanel = new JPanel();
@@ -218,21 +264,38 @@ public class AccountGUI extends JPanel implements MouseListener, ActionListener{
         contentField.add(searchPanel);
         searchPanel.setLayout(null);
         
-        JLabel lblTmKim = new JLabel("Tìm kiếm");
+        lblTmKim = new JLabel("Tìm kiếm");
         lblTmKim.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTmKim.setFont(new Font("Arial", Font.BOLD, 15));
-        lblTmKim.setBounds(80, 80, 120, 40);
+        lblTmKim.setFont(new Font("Arial", Font.BOLD, 16));
+        lblTmKim.setBounds(85, 0, 120, 40);
         searchPanel.add(lblTmKim);
+        
+        searchCbB = new JComboBox<String>();
+        searchCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã tài khoản", "Tên đăng nhập"}));
+        searchCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        searchCbB.setBounds(10, 64, 101, 40);
+        searchPanel.add(searchCbB);
         
         textField = new JTextField();
         textField.setFont(new Font("Arial", Font.PLAIN, 13));
         textField.setColumns(10);
-        textField.setBounds(55, 131, 170, 30);
+        textField.setBounds(121, 64, 149, 40);
         searchPanel.add(textField);
+        
+        lblSpXp = new JLabel("Sắp xếp");
+        lblSpXp.setFont(new Font("Arial", Font.BOLD, 13));
+        lblSpXp.setBounds(10, 134, 80, 40);
+        searchPanel.add(lblSpXp);
+        
+        sortCbB = new JComboBox<String>();
+        sortCbB.setModel(new DefaultComboBoxModel<String>(new String[] {"Mã tài khoản", "Tên đăng nhập"}));
+        sortCbB.setFont(new Font("Arial", Font.BOLD, 13));
+        sortCbB.setBounds(121, 134, 149, 40);
+        searchPanel.add(sortCbB);
         
         searchButton = new JButton("OK");
         searchButton.setFont(new Font("Arial", Font.PLAIN, 13));
-        searchButton.setBounds(90, 180, 100, 30);
+        searchButton.setBounds(97, 224, 100, 50);
         searchPanel.add(searchButton);
 		//End
 		

@@ -40,8 +40,8 @@ public class LeftMenu extends JPanel implements ActionListener{
 			funcBtn[i].addActionListener(this);
 			this.add(funcBtn[i]);
 			y = y + h;
-		}
-				
+			
+		}	
 	}
 	public void mouseEntered(){
 
@@ -72,6 +72,14 @@ public class LeftMenu extends JPanel implements ActionListener{
 				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func2");	
 				funcBtn[i].setEnabled(false);
 			}
+			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Nguyên liệu")) {		
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func4");	
+				funcBtn[i].setEnabled(false);
+			}
+			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Món ăn")) {		
+				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func3");	
+				funcBtn[i].setEnabled(false);
+			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equals("Tài khoản")) {		
 				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func5");	
 				funcBtn[i].setEnabled(false);
@@ -84,6 +92,7 @@ public class LeftMenu extends JPanel implements ActionListener{
 				GiaoDien.cardLayout.show(GiaoDien.switchPanel, "func7");	
 				funcBtn[i].setEnabled(false);
 			}
+			
 		}
 	}
 	
