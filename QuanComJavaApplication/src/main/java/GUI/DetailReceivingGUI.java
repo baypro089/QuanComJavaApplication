@@ -388,8 +388,7 @@ public class DetailReceivingGUI extends JPanel implements MouseListener, ActionL
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(!idPNTxt.getText().equals("") || !idNCCTxt.getText().equals("") || !totalPricePNTxt.getText().equals("")
-						|| !idStaffCreatePNTxt.getText().equals("")) {
+				if(!idPNTxt.getText().equals("") || !idNCCTxt.getText().equals("") || !idStaffCreatePNTxt.getText().equals("")) {
 					int decide = JOptionPane.showConfirmDialog(null, "Mot so du lieu van chua duoc luu, ban co muon quay lai?", "Thông báo", JOptionPane.YES_NO_OPTION);						
 					if(decide==0) {
 						GiaoDien.phieuNhap.setVisible(true);

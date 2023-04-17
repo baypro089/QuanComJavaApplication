@@ -22,7 +22,7 @@ public class ProductAndRecipeGUI extends JTabbedPane{
 		product = new ProductGUI();
 		product.setPreferredSize(new Dimension(1080, 700));
 		this.add("Món ăn", product);
-		//tab nguyên liệu
+		//tab công thức
 	}
 	
 	
