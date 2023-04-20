@@ -17,6 +17,8 @@ public class LeftMenu extends JPanel implements ActionListener{
 	public String [] BtnText = {"Đơn hàng", "Nhập hàng", "Món ăn", "Nguyên liệu", "Tài khoản", "Nhân viên", "Nhà cung cấp"};
 	int x = 0, y = 245;
 	int w = 200, h = 65;
+	private JLabel userLb;
+    private JPanel nut;
 	public LeftMenu() {
 		
 		init();
@@ -27,9 +29,22 @@ public class LeftMenu extends JPanel implements ActionListener{
 		
 		
 		//Logo
-		
-		//food_action action = new food_action(this);
+	    userLb = new JLabel();
+	    userLb.setIcon(new ImageIcon("ImagesIcon/anh-meo-cute.jpg"));
+	    userLb.setBounds(0, 0, 200, 200);
+	    
+	    nut = new JPanel(new GridLayout(1,2));
+	    nut.setBounds(0, 200, 200, 45);
+	    JButton dangNhap = new JButton("Trang chủ");
+	    dangNhap.setSize(100,45);
+	    JButton dangXuat = new JButton("Đăng xuất");
+	    dangNhap.setSize(100,45);
 
+	    nut.add(dangNhap);
+	    nut.add(dangXuat);      
+	    this.add(nut);
+	    this.add(userLb);
+	    /////////////////////
 		for(int i = 0; i < BtnText.length; i++) {
 			funcBtn[i] = new JButton(BtnText[i]);
 			funcBtn[i].setBounds(x, y, w, h);
